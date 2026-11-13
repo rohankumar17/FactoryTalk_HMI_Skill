@@ -157,6 +157,34 @@ When `#1=[BNR_PLC]AER006_M01`:
 
 ---
 
+### Numeric Input Cursor Point Objects (`<numericInputCursorPoint>`)
+When operators need to enter or modify a setpoint on a touch PanelView terminal (e.g. Manual Speed Setpoint), use `<numericInputCursorPoint>` instead of a passive `<numericDisplay>`.
+
+#### Key Attributes & Touch Keypad Activation:
+* **Pop-up Keypad:** `numericPopup="keypad"` (automatically pops up the on-screen numeric keypad when touched).
+* **Min/Max Limits:** `minValue="0"` `maxValue="50"` (enforces clamping limits directly in the HMI terminal).
+* **Precision & Formatting:** `decimalPlaces="1"` `numberOfDigits="4"` `decimalPoint="implicit"`.
+* **Bezel & Highlight:** `borderWidth="4"` `borderColor="#F0F0F0"` `highlightColor="#0078D7"` `touch="true"`.
+
+#### Parameter Substitution Token in Connections:
+When binding a reusable faceplate parameter (e.g. `#1`) to a member tag inside a `<numericInputCursorPoint>`, FactoryTalk View Studio serializes the expression as:
+```xml
+<!-- CORRECT: FactoryTalk View Studio XML Parameter Token for Numeric Inputs -->
+<numericInputCursorPoint name="NumericInputCursorPoint1" height="25" width="95" left="157" top="189" 
+                         visible="true" alignment="middleCenter" audio="true" backStyle="solid" 
+                         backColor="#F0F0F0" foreColor="#003366" borderWidth="4" borderColor="#F0F0F0" 
+                         highlightColor="#0078D7" touch="true" numericPopup="keypad" decimalPlaces="1" 
+                         numberOfDigits="4" minValue="0" maxValue="50">
+    <connections>
+        <connection name="Value" expression="{/*LS:0 {{#1}}*/.MAN_SPEED}"/>
+    </connections>
+</numericInputCursorPoint>
+```
+> [!IMPORTANT]
+> Notice the double curly braces around the parameter placeholder `{{#1}}` inside `{/*LS:0 {{#1}}*/.MAN_SPEED}`. FactoryTalk View ME uses double braces to escape the parameter token within connection expression strings. Single-bracket `{/*LS:0 {#1}*/.MAN_SPEED}` will fail to parse upon XML re-import.
+
+---
+
 ## 4. Alarm System XML (`Alarms.xml`) Deep Dive
 
 ### Exact Root Schema & Versioning

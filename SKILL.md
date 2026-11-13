@@ -16,6 +16,7 @@ description: Authoritative guide and technical reference for coding Rockwell Aut
 | **Multi-line Caption** | `caption="LINE1&#xA;LINE2"` | Using literal Enter or `\n` in XML attributes |
 | **Parameter Placeholder in Text** | `caption="PREFIX /*LS:0 {#4}*/"` | Using `#4` (prints literal "#4") or `/*T:#4*/` |
 | **Parameter in Expression** | `expression="{#1.AUT} * 1 + {#1.MAN} * 2"` | Using triple braces `expression="{{{#1}}.AUT}"` |
+| **Parameter in Numeric Input** | `expression="{/*LS:0 {{#1}}*/.MAN_SPEED}"` | Using single braces `{/*LS:0 {#1}*/.TAG}` |
 | **Parameter File Text Value** | `#4=PUMP-101` (no quotes) | `#4="PUMP-101"` (prints literal quotation marks) |
 | **Alarm Trigger Element** | `<trigger id="T1" type="value" exp="{[PLC]Tag}" .../>` | Leaving triggers empty |
 | **Alarm Message Trigger Binding**| `<message id="M1" trigger="#T1" .../>` | `trigger="T1"` (missing `#` causes `<Unassigned>` error) |
