@@ -20,6 +20,7 @@ description: Authoritative guide and technical reference for coding Rockwell Aut
 | **Parameter File Text Value** | `#4=PUMP-101` (no quotes) | `#4="PUMP-101"` (prints literal quotation marks) |
 | **Alarm Trigger Element** | `<trigger id="T1" type="value" exp="{[PLC]Tag}" .../>` | Leaving triggers empty |
 | **Alarm Message Trigger Binding**| `<message id="M1" trigger="#T1" .../>` | `trigger="T1"` (missing `#` causes `<Unassigned>` error) |
+| **Multistate Indicator States**| `setLastStateId="3"` for states 0, 1, 2 + Error state | `setLastStateId="2"` causes `cannot be set to a value less than the 'stateId'` |
 | **Normally-Closed / E-Stop Alarm**| `exp="NOT {[PLC]Estop_Healthy}"` + `trigger-value="1"` | `trigger-value="0"` (causes `trigger-value = < 0 > is invalid`) |
 
 ---
